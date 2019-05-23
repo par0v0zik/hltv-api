@@ -1,5 +1,5 @@
-import { getNews, getResults, getMatches } from '../src'
-import { CONFIG } from '../src/config'
+import { getNews, getResults, getMatches } from '../lib'
+import { CONFIG } from '../lib/config'
 
 describe('hltv-api', () => {
   describe('get appropriate responses `getNews`', () => {

@@ -1,10 +1,12 @@
 module.exports = {
   env: {
-    browser: true,
-    es6: true,
+    node: true,
     jest: true,
   },
-  extends: ['airbnb-base', 'plugin:prettier/recommended'],
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -12,12 +14,18 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
+    project: 'tsconfig.json',
+    tsconfigRootDir: '.',
+    warnOnUnsupportedTypeScriptVersion: true,
   },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   rules: {
     'import/prefer-default-export': 'off',
     'import/no-default-export': 'on',
+    '@typescript-eslint/indent': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/member-delimiter-style': 'off',
   },
   settings: {
     'import/resolver': {

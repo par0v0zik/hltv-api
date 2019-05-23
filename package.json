@@ -10,8 +10,8 @@
   "scripts": {
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "cover": "jest --coverage",
-    "lint": "eslint --ext js,ts,tsx ./src",
-    "pretest": "npm run lint",
+    "lint": "eslint --ext js,ts,tsx ./lib",
+    "pretest": "yarn lint",
     "test": "jest",
     "test:w": "yarn test --watch",
     "prebuild": "rimraf dist",
@@ -21,7 +21,7 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "files": [
-    "dist",
+    "lib",
     "README.md"
   ],
   "repository": {
