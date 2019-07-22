@@ -25,7 +25,7 @@ export default class Matches {
         normalizeWhitespace: true,
       })
 
-      const stats: any[] = []
+      const players: any[] = []
 
       const allContent = $('.matchstats').find('#all-content')
 
@@ -75,7 +75,7 @@ export default class Matches {
           rating,
         }
 
-        stats.push(objData)
+        players.push(objData)
       })
 
       const team2Stats = allContent
@@ -124,10 +124,17 @@ export default class Matches {
           rating,
         }
 
-        stats.push(objData)
+        players.push(objData)
       })
 
-      callback(stats, error)
+      const maps: any[] = []
+      const mapLinks = $('.maps').find('.mapholder .results a')
+
+      mapLinks.each((_, el) => {
+        maps.push($(el).attr('href'))
+      })
+
+      callback({ maps, players }, error)
     })
   }
 }
