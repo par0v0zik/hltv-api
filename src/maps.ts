@@ -39,9 +39,12 @@ export default function get(mapId: string, callback: any) {
       normalizeWhitespace: true,
     })
 
-    const map = $(
-      '.stats-match-map:not(.inactive) .dynamic-map-name-full'
-    ).text()
+    const mapMatch = $('.match-info-box-con .match-info-box')
+      .eq(0)
+      .text()
+      .match(/Map\n(\w+)\n/)
+
+    const map = mapMatch ? mapMatch[1] : ''
 
     const team1Info = {} as TeamInfo
     const team2Info = {} as TeamInfo
@@ -91,25 +94,22 @@ function getPlayers($: CheerioStatic, tableEl: Cheerio) {
     const player = {} as Player
 
     player.playerId = el.find('td.st-player a').text()
-    player.kills = parseInt(
-      el
-        .find('td.st-kills')
-        .text()
-        .match(/^\d+/)[0]
-    )
-    player.assists = parseInt(
-      el
-        .find('td.st-assists')
-        .text()
-        .match(/^\d+/)[0]
-    )
+    const killsMatch = el
+      .find('td.st-kills')
+      .text()
+      .match(/^\d+/)
+    player.kills = killsMatch ? parseInt(killsMatch[0]) : 0
+    const assistsMatch = el
+      .find('td.st-assists')
+      .text()
+      .match(/^\d+/)
+    player.assists = assistsMatch ? parseInt(assistsMatch[0]) : 0
     player.deaths = parseInt(el.find('td.st-deaths').text())
-    player.kast = parseFloat(
-      el
-        .find('td.st-kdratio')
-        .text()
-        .match(/^[\d\.]+/)[0]
-    )
+    const kastMatch = el
+      .find('td.st-kdratio')
+      .text()
+      .match(/^[\d\.]+/)
+    player.kast = kastMatch ? parseFloat(kastMatch[0]) : 0
     player.kdd = parseInt(el.find('td.st-kddiff').text())
     player.adr = parseFloat(el.find('td.st-adr').text())
     player.fkd = parseInt(el.find('td.st-fkdiff').text())
